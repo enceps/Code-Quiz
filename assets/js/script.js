@@ -63,6 +63,17 @@ console.log(questions[0].answers[1])
 
 
 console.log(questionElementSelect)
+//Start Timer
+let time = 60;
+var timerEl = document.getElementById('time');
+
+setInterval(countDown, 1000);
+
+function countDown(){
+    timerEl.innerHTML = time;
+    time--;
+
+}
 }
 //Show and Check Answers
 answerA.addEventListener('click', checkAnswerA)
@@ -114,5 +125,6 @@ console.log(questionElementSelect)
 function answerQuestion(){
 
 }
+
 
 
