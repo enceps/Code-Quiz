@@ -9,10 +9,13 @@ var answerB = document.getElementById('B')
 var answerC = document.getElementById('C')
 var answerD = document.getElementById('D')
 var scoreElement = document.getElementById('score')
-let time = 60;
-var addTime = 60;
+let time = 5;
+var addTime = 5;
 var timerEl = document.getElementById('time');
 var pointCount = 0;
+var highScoreElement = document.getElementById('submit-highscore')
+var playerScoreElement = document.getElementById('player-score')
+var formElement = document.querySelector('form');
 //List of Questions
 var questions = [
 
@@ -74,13 +77,22 @@ console.log(questionElementSelect)
 //Start Timer
 
 
-setInterval(countDown, 1000);
+var counterTimer = setInterval(countDown, 1000);
 
 function countDown(){
     timerEl.innerHTML = time;
     time--;
+    //End Timer when reaches 0
+    if (time == -1){
+        questionElement.innerHTML = 'GAME OVER';
+        clearInterval(counterTimer);
+        highScoreElement.classList.remove('hidden');
+        scoreElement.innerHTML = 'Score:' + pointCount;
+        playerScoreElement.innerHTML = 'Score:' + pointCount;
+    }
 
 }
+console.log(countDown);
 }
 
 function nextQuestion() {
@@ -116,11 +128,6 @@ function checkAnswerA(){
         time = 60;
         pointCount= pointCount + 1;
         scoreElement.innerHTML = pointCount;
-        // questionElementSelect.innerText= questions[randomQuestion + 1].question;
-        // answerA.innerText = questions[randomQuestion + 1].answers[0].text;
-        // answerB.innerText = questions[randomQuestion + 1].answers[1].text;
-        // answerC.innerText = questions[randomQuestion + 1].answers[2].text;
-        // answerD.innerText = questions[randomQuestion + 1].answers[3].text; 
  
             nextQuestion()
    
@@ -198,9 +205,31 @@ function checkAnswerD(){
 }
 console.log(questionElementSelect)
 
-function answerQuestion(){
+function timerEnd(){
 
 }
 
+
+
+formElement.addEventListener("submit", function(event){
+event.preventDefault();
+
+console.log(event)
+var playerNameInput = document.querySelector("input[name='player-name']");
+
+// console.dir(playerNameInput);
+// var scoresArray = {
+//     name: value,
+//     score: pointCount,
+//   }
+//   console.log(scoresArray)
+
+  var listScoreElement = document.createElement("div");
+listScoreElement.className = "user-score";
+listScoreElement.innerHTML = playerNameInput.value + ' : ' + pointCount;
+formElement.appendChild(listScoreElement);
+localStorage.setItem( "Scores", JSON.stringify(playerNameInput.value + " : " + pointCount));
+
+});
 
 
