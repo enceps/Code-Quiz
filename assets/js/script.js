@@ -216,20 +216,23 @@ event.preventDefault();
 
 console.log(event)
 var playerNameInput = document.querySelector("input[name='player-name']");
+var scoresArray = [];
+var scoresObj = {};
+scoresObj[1] = playerNameInput.value, pointCount;
+scoresObj[2] = pointCount;
+scoresArray.push(scoresObj);
+var highScore = JSON.stringify(playerNameInput.value + " : " + pointCount);
+ localStorage.setItem( "Scores", highScore );
 
-// console.dir(playerNameInput);
-// var scoresArray = {
-//     name: value,
-//     score: pointCount,
-//   }
-//   console.log(scoresArray)
 
-  var listScoreElement = document.createElement("div");
-listScoreElement.className = "user-score";
-listScoreElement.innerHTML = playerNameInput.value + ' : ' + pointCount;
-formElement.appendChild(listScoreElement);
-localStorage.setItem( "Scores", JSON.stringify(playerNameInput.value + " : " + pointCount));
+  console.log(scoresArray);
+
+
+
+
 
 });
+
+
 
 
